@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response, redirect, url_for
 
 app = Flask(__name__)
 
@@ -12,6 +12,21 @@ def api():
         return jsonify({"message": "Método PUT ativado."})
     elif request.method == "DELETE":
         return jsonify({"message": "Método DELETE ativado."})
+    
+# criando views
+@app.route("/custom-response")
+def custom_response():
+    resposta = make_response("Texto com cabeçalhos personalizados", 200)
+    resposta.headers["Custom-Header"] = "OlaFlask"
+    return resposta
+
+@app.route("/")
+def home():
+    return "Bem-vindo ao seu primeiro app de Flask"
+
+@app.route("/redirect")
+def redirecionamento():
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -13,6 +13,7 @@ disable =
       R1705, #no-else-return
       R1710, #inconsistent-return-statements
       W0718, #broad-exception-caught
+      W3101, #missing-timeout
 
 # Analyse import fallback blocks. This can be used to support both Python 2 and
 # 3 compatible code, which means that the block might have code that exists
