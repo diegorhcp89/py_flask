@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, make_response, redirect, url_for, render_template
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def api():
         return jsonify({"message": "Método PUT ativado."})
     elif request.method == "DELETE":
         return jsonify({"message": "Método DELETE ativado."})
-    
+
 # criando views
 @app.route("/custom-response")
 def custom_response():
@@ -32,6 +33,17 @@ def redirecionamento():
 @app.route("/teste-jinja")
 def teste_jinja():
     return render_template("index.html", nome="Diego", idade=39)
+
+# Loops
+@app.route("/usuarios")
+def usuarios():
+    lista_usuarios = [
+        {"nome": "Ana", "email": "ana@gmail.com"},
+        {"nome": "Pedro", "email": "pedro@gmail.com"},
+        {"nome": "João", "email": "joao@gmail.com"}
+    ]
+
+    return render_template("usuarios.html", usuarios=lista_usuarios, data=datetime.now())
 
 if __name__ == "__main__":
     app.run(debug=True)
