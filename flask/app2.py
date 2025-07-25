@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response, redirect, url_for
+from flask import Flask, request, jsonify, make_response, redirect, url_for, render_template
 
 app = Flask(__name__)
 
@@ -27,6 +27,11 @@ def home():
 @app.route("/redirect")
 def redirecionamento():
     return redirect(url_for("home"))
+
+# Iniciando com Jinja
+@app.route("/teste-jinja")
+def teste_jinja():
+    return render_template("index.html", nome="Diego", idade=39)
 
 if __name__ == "__main__":
     app.run(debug=True)
