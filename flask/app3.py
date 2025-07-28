@@ -21,7 +21,19 @@ def teste():
 @app.route("/contato", methods=["GET", "POST"])
 def contato():
     if request.method == "POST":
-        print(request.form.get("nome"))
+        # processando forms
+
+        # 1 - resgata variaveis
+        nome = request.form.get("nome")
+        email = request.form.get("email")
+        msg = request.form.get("mensagem")
+
+        # 2 - trata / valida os dados
+
+        # 3 - se algo der errado, volta msg para o usuário
+
+        # 4 - faz o processo final (email, redirecionar pag., salvar banco)
+        return render_template("resultado.html", nome=nome, email=email, msg=msg)
 
     return render_template("contato.html")
 
