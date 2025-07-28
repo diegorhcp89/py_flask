@@ -1,4 +1,4 @@
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, ValidationError
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired, Email
 from flask import Flask, jsonify, make_response, redirect, url_for, render_template
@@ -28,6 +28,23 @@ def login():
 @app.route("/sucesso")
 def sucesso():
     return "Login realizado com sucesso!"
+
+# validação personalizada
+def validar_nome(form, field):
+    if len(field.data < 3):
+        raise ValidationError("O nome deve ter pelo menos 3 caracteres")
+
+class CadastroForm(FlaskForm):
+    nome = StringField("Nome", validators=[validar_nome])
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    senha = PasswordField("Senha", validators=[DataRequired()])
+    submit = SubmitField("Entrar")
+
+@app.route("/cadastro", methods=["GET", "POST"])
+def cadastro():
+    form = CadastroForm()
+
+    return render_template("cadastro.html", form=form)
 
 if __name__ == "__main__":
     app.run(debug=True)
