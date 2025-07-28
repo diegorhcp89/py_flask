@@ -51,5 +51,12 @@ def listar_usuarios():
 
     return render_template("listar_usuarios.html", usuarios=usuarios)
 
+# aula 3 -  variaveis de ambiente
+app.config["SECRET_KET"] = os.getenv("SECRET_KEY", "chave-padrao")
+
+@app.route("/teste-env")
+def teste_env():
+    return f'A chave secreta é {app.config["SECRET_KEY"]}'
+
 if __name__ == "__main__":
     app.run(debug=True)
