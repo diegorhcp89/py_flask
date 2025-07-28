@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{%block content %}
+<h2>Formulario de usuario</h2>
+<form method="post">
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome">
+    <br><br>
+    <label for="email">Email:</label>
+    <input type="text" name="email">
+    <br><br>
+    <button type="submit">Criar usuario</button>
+</form>
+{% endblock %}
