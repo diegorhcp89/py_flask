@@ -17,5 +17,13 @@ def sobre():
 def teste():
     return render_template("teste.html")
 
+# form
+@app.route("/contato", methods=["GET", "POST"])
+def contato():
+    if request.method == "POST":
+        print(request.form.get("nome"))
+
+    return render_template("contato.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
