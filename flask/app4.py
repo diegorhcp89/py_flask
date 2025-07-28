@@ -55,5 +55,20 @@ def mensagem():
     flash("Esta é uma mensagem flash!", "sucess")
     return render_template("mensagem.html")
 
+# flash message aplicação pratica
+@app.route("/teste")
+def teste():
+    return render_template("teste.html")
+
+@app.route("/logout")
+def logout():
+    # encerraria a sessao
+    flash("Você saiu do sistema com sucesso!", "info")
+    return redirect(url_for("home"))
+
+@app.route("/")
+def home():
+    return render_template("home.html")
+
 if __name__ == "__main__":
     app.run(debug=True)

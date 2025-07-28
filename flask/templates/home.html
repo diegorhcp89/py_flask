@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {%block content %}
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+{% if messages %}
+
+    {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+    {% endfor %}
+
+{% endif %} {% endwith %}
+
 <h2>Página ínicial</h2>
 <p>Este é o nosso site</p>
 {% endblock %}
