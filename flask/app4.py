@@ -12,13 +12,22 @@ app.config["SECRET_KEY"] = 'chave-secreta'
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     senha = PasswordField("Senha", validators=[DataRequired()])
-    submit = SubmitField("Entar")
+    submit = SubmitField("Entrar")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
 
+    if form.validate_on_submit():
+        return redirect(url_for("sucesso"))
+    else:
+        print("USUARIO E SENHA NAO ENCONTRADOS!")
+
     return render_template("login.html", form=form)
+
+@app.route("/sucesso")
+def sucesso():
+    return "Login realizado com sucesso!"
 
 if __name__ == "__main__":
     app.run(debug=True)
