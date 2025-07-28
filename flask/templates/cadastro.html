@@ -8,4 +8,6 @@
     <div>{{ form.senha.label }} {{ form.senha() }}</div>
     <div>{{ form.submit() }}</div>
 </form>
-{% endblock %}
+{% if form.nome.erros %}
+<p style="color: red;">{{ form.nome.erros }}</p>
+{% endif %} {% endblock %}

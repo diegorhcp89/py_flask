@@ -31,7 +31,7 @@ def sucesso():
 
 # validação personalizada
 def validar_nome(form, field):
-    if len(field.data < 3):
+    if len(field.data) < 3:
         raise ValidationError("O nome deve ter pelo menos 3 caracteres")
 
 class CadastroForm(FlaskForm):
@@ -43,6 +43,9 @@ class CadastroForm(FlaskForm):
 @app.route("/cadastro", methods=["GET", "POST"])
 def cadastro():
     form = CadastroForm()
+
+    if form.validate_on_submit():
+        return redirect(url_for("sucesso"))
 
     return render_template("cadastro.html", form=form)
 
