@@ -1,7 +1,7 @@
 from wtforms import StringField, PasswordField, SubmitField, ValidationError
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired, Email
-from flask import Flask, jsonify, make_response, redirect, url_for, render_template
+from flask import Flask, jsonify, make_response, redirect, url_for, render_template, flash, get_flashed_messages
 from datetime import datetime
 
 app = Flask(__name__)
@@ -48,6 +48,12 @@ def cadastro():
         return redirect(url_for("sucesso"))
 
     return render_template("cadastro.html", form=form)
+
+# flash messages
+@app.route("/mensagem")
+def mensagem():
+    flash("Esta é uma mensagem flash!", "sucess")
+    return render_template("mensagem.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
