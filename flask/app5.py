@@ -41,7 +41,15 @@ def criar_usuario():
 
         db.session.commit()
 
+        return redirect(url_for("listar_usuarios"))
+
     return render_template("criar_usuario.html")
+
+@app.route("/listar_usuarios")
+def listar_usuarios():
+    usuarios = Usuario.query.all()
+
+    return render_template("listar_usuarios.html", usuarios=usuarios)
 
 if __name__ == "__main__":
     app.run(debug=True)
